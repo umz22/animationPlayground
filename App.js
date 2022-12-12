@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler'
+import * as React from 'react';
+import { Button, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+
+// screens
+import PangestureDemo from './Screens/PanGesture/PanGestureDemo'
+import TransitionsDemo from './Screens/Transitions/TransitionsDemo';
+import Animations from './Screens/HighOrder/Animations'
+import CircularSlider from './Screens/CircularSlider/CircularSlider';
+
+const HomeScreen = ({ navigation }) => (
+  <PangestureDemo/>
+)
+
+const Transitions = ({ navigation }) => (
+  <TransitionsDemo/>
+)
+
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="PanGesture">
+        <Drawer.Screen name="Pan Gesture" component={HomeScreen} />
+        <Drawer.Screen name="Transitions" component={Transitions} />
+        <Drawer.Screen name="Loading" component={Animations} />
+        <Drawer.Screen name="Circular Slider" component={CircularSlider} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
